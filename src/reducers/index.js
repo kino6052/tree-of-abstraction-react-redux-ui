@@ -1,4 +1,4 @@
-import { INCREMENT, ADD_CHILD, REMOVE_CHILD, CREATE_NODE, DELETE_NODE } from '../actions'
+import { INCREMENT, ADD_CHILD, REMOVE_CHILD, CREATE_NODE, DELETE_NODE, SAVE_NAME } from '../actions'
 
 const childIds = (state, action) => {
   switch (action.type) {
@@ -23,6 +23,11 @@ const node = (state, action) => {
       return {
         ...state,
         counter: state.counter + 1
+      }
+    case SAVE_NAME:
+      return {
+        ...state,
+        name: action.name
       }
     case ADD_CHILD:
     case REMOVE_CHILD:

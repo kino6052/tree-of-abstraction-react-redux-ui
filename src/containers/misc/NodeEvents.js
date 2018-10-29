@@ -44,11 +44,15 @@ export const handleSaveNameClickGenerator = (that) => {
     // saveName (state.name, id)
     let {
       state: {
-        editName
+        editName,
+        name
+      },
+      props: {
+        saveName,
+        id
       }
     } = that;
-    console.log(that.state);
-    // saveName(name, id)
+    saveName(id, name)
     that.setState({
       editName: !editName
     })

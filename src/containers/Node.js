@@ -34,7 +34,7 @@ export class Node extends Component {
     let handleNameChange = handleNameChangeGenerator(this);
     let renderChild = renderChildGenerator(this);
 
-    const { counter, parentId, childIds } = this.props
+    const { counter, parentId, childIds, name: nodeName } = this.props
     const {
       state: {
         editName,
@@ -46,7 +46,7 @@ export class Node extends Component {
         {
           !editName &&
           <Name
-            name={name}
+            name={ nodeName }
             onClick={handleChangeNameClick}
           />
         }

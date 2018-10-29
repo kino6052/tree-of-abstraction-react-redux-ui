@@ -1,6 +1,6 @@
 import deepFreeze from 'deep-freeze'
 import reducer from './index'
-import { increment, createNode, deleteNode, addChild, removeChild } from '../actions'
+import { increment, createNode, deleteNode, addChild, removeChild, saveName } from '../actions'
 
 describe('reducer', () => {
   it('should provide the initial state', () => {
