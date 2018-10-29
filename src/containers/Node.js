@@ -14,6 +14,7 @@ import {
 import { Name, NameInput} from './misc/components/Name'
 import { Link } from './misc/components/Link'
 import { AddButton } from './misc/components/Buttons'
+import { Note } from './Note'
 
 export class Node extends Component {
   constructor(props) {
@@ -52,11 +53,16 @@ export class Node extends Component {
         }
         {
           editName &&
-          <NameInput
-            onChange={handleNameChange}
-            onClickSave={handleSaveNameClick}
-            onClickCancel={handleChangeNameClick}
-          />
+          (
+            <div>
+              <NameInput
+                onChange={handleNameChange}
+                onClickSave={handleSaveNameClick}
+                onClickCancel={handleChangeNameClick}
+              />
+              <Note/>
+            </div>
+          )
         }
         <button onClick={handleIncrementClick}>+</button>
         <Link parentId={parentId} onClick={handleRemoveClick}/>
