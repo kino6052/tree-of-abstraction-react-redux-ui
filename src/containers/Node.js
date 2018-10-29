@@ -8,6 +8,7 @@ import {
   handleRemoveClickGenerator,
   handleChangeNameClickGenerator,
   handleSaveNameClickGenerator,
+  handleNameChangeGenerator,
   renderChildGenerator
 } from './misc/NodeEvents';
 import {
@@ -25,7 +26,9 @@ export class Node extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editName: false
+      editName: false,
+      name: '',
+      id: null
     };
   }
 
@@ -35,12 +38,14 @@ export class Node extends Component {
     let handleRemoveClick = handleRemoveClickGenerator(this);
     let handleChangeNameClick = handleChangeNameClickGenerator(this);
     let handleSaveNameClick = handleSaveNameClickGenerator(this);
+    let handleNameChange = handleNameChangeGenerator(this);
     let renderChild = renderChildGenerator(this);
 
-    const { counter, parentId, childIds, name } = this.props
+    const { counter, parentId, childIds } = this.props
     const {
       state: {
-        editName
+        editName,
+        name
       }
     } = this;
     return (
@@ -49,6 +54,7 @@ export class Node extends Component {
         {
           editName &&
           <NameInput
+            onChange={handleNameChange}
             onClickSave={handleSaveNameClick}
             onClickCancel={handleChangeNameClick}
           />

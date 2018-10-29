@@ -42,7 +42,33 @@ export const handleSaveNameClickGenerator = (that) => {
   return e => {
     e.preventDefault()
     // saveName (state.name, id)
-    console.log(that.state.editName);
+    let {
+      state: {
+        editName
+      }
+    } = that;
+    console.log(that.state);
+    // saveName(name, id)
+    that.setState({
+      editName: !editName
+    })
+  }
+}
+
+export const handleNameChangeGenerator = (that) => {
+  return e => {
+    e.preventDefault()
+    // saveName (state.name, id)
+    let {
+      state: {
+        name
+      }
+    } = that;
+    // saveName(name, id)
+    console.log(that.state);
+    that.setState({
+      name: e.target.value
+    })
   }
 }
 
