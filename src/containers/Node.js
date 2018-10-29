@@ -4,6 +4,13 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 
 export class Node extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editName: false
+    };
+  }
+
   handleIncrementClick = () => {
     const { increment, id } = this.props
     increment(id)
@@ -25,6 +32,14 @@ export class Node extends Component {
     deleteNode(id)
   }
 
+  handleChangeNameClick = e => {
+    e.preventDefault()
+    this.setState({
+      editName: !this.state.editName
+    })
+    console.log(this.state.editName);
+  }
+
   renderChild = childId => {
     const { id } = this.props
     return (
@@ -35,10 +50,28 @@ export class Node extends Component {
   }
 
   render() {
-    const { counter, parentId, childIds } = this.props
+    const { counter, parentId, childIds, name } = this.props
+    const {
+      state: {
+        editName
+      }
+    } = this;
     return (
       <div>
-        Counter: {counter}
+        {
+          !editName &&
+          (<p onClick={this.handleChangeNameClick}>Name: { name }</p>)
+        }
+        {
+          editName &&
+          (
+            <div>
+              <input></input>
+              <button>Save</button>
+              <button onClick={this.handleChangeNameClick}>Cancel</button>
+            </div>
+          )
+        }
         {' '}
         <button onClick={this.handleIncrementClick}>
           +
