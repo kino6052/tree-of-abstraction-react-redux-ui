@@ -11,16 +11,9 @@ import {
   handleNameChangeGenerator,
   renderChildGenerator
 } from './misc/NodeEvents';
-import {
-  Name,
-  NameInput
-} from './misc/components/Name'
-import {
-  Link
-} from './misc/components/Link'
-import {
-  AddButton
-} from './misc/components/Buttons'
+import { Name, NameInput} from './misc/components/Name'
+import { Link } from './misc/components/Link'
+import { AddButton } from './misc/components/Buttons'
 
 export class Node extends Component {
   constructor(props) {
