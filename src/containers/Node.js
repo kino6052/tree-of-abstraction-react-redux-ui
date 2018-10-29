@@ -50,7 +50,13 @@ export class Node extends Component {
     } = this;
     return (
       <div>
-        { !editName && <Name name={name} onClick={handleChangeNameClick}/> }
+        {
+          !editName &&
+          <Name
+            name={name}
+            onClick={handleChangeNameClick}
+          />
+        }
         {
           editName &&
           <NameInput
