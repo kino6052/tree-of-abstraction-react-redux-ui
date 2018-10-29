@@ -12,7 +12,6 @@ export const handleIncrementClickGenerator = (that) => {
 export const handleAddChildClickGenerator = (that) => {
   return e => {
     e.preventDefault()
-
     const { addChild, createNode, id } = that.props
     const childId = createNode().nodeId
     addChild(id, childId)

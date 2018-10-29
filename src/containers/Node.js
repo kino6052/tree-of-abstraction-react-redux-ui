@@ -14,6 +14,12 @@ import {
   Name,
   NameInput
 } from './misc/components/Name'
+import {
+  Link
+} from './misc/components/Link'
+import {
+  AddButton
+} from './misc/components/Buttons'
 
 export class Node extends Component {
   constructor(props) {
@@ -47,26 +53,11 @@ export class Node extends Component {
             onClickCancel={handleChangeNameClick}
           />
         }
-        {' '}
-        <button onClick={handleIncrementClick}>
-          +
-        </button>
-        {' '}
-        {typeof parentId !== 'undefined' &&
-          <a href="#" onClick={handleRemoveClick} // eslint-disable-line jsx-a11y/anchor-is-valid
-             style={{ color: 'lightgray', textDecoration: 'none' }}>
-            ×
-          </a>
-        }
+        <button onClick={handleIncrementClick}>+</button>
+        <Link parentId={parentId} onClick={handleRemoveClick}/>
         <ul>
           {childIds.map(renderChild)}
-          <li key="add">
-            <a href="#" // eslint-disable-line jsx-a11y/anchor-is-valid
-              onClick={handleAddChildClick}
-            >
-              Add child
-            </a>
-          </li>
+          <AddButton onClick={ handleAddChildClick }/>
         </ul>
       </div>
     )
