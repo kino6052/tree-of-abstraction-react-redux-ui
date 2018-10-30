@@ -15,7 +15,8 @@ export default function generateTree() {
       id: i,
       counter: 0,
       childIds: [],
-      name: `Name_${parentId}`
+      name: `Name_${parentId}`,
+      collapsed: false
     }
     tree.nodes[parentId].childIds.push(i)
   }

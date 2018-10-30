@@ -1,4 +1,4 @@
-import { INCREMENT, ADD_CHILD, REMOVE_CHILD, CREATE_NODE, DELETE_NODE, SAVE_NAME } from '../actions'
+import { INCREMENT, ADD_CHILD, REMOVE_CHILD, CREATE_NODE, DELETE_NODE, SAVE_NAME, TOGGLE_COLLAPSE_MANY } from '../actions'
 
 const childIds = (state, action) => {
   switch (action.type) {
@@ -52,6 +52,14 @@ const deleteMany = (state, ids) => {
   return state
 }
 
+const toggleCollapseMany = (state, ids) => {
+  state = { ...state }
+  ids.forEach(id => {
+    state[id] = { ...state[id], collapsed: !state[id].collapsed }
+  })
+  return state
+}
+
 export default (state = {}, action) => {
   const { nodeId } = action
   if (typeof nodeId === 'undefined') {
@@ -61,6 +69,11 @@ export default (state = {}, action) => {
   if (action.type === DELETE_NODE) {
     const descendantIds = getAllDescendantIds(state, nodeId)
     return deleteMany(state, [ nodeId, ...descendantIds ])
+  }
+
+  if (action.type === TOGGLE_COLLAPSE_MANY) {
+    const descendantIds = getAllDescendantIds(state, nodeId)
+    return toggleCollapseMany(state, descendantIds)
   }
 
   return {

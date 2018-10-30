@@ -5,6 +5,7 @@ export const ADD_CHILD = 'ADD_CHILD'
 export const REMOVE_CHILD = 'REMOVE_CHILD'
 export const SAVE_NAME = 'SAVE_NAME'
 export const SELECT_NODE = 'SELECT_NODE'
+export const TOGGLE_COLLAPSE_MANY = 'TOGGLE_COLLAPSE_MANY'
 
 export const increment = (nodeId) => ({
   type: INCREMENT,
@@ -42,5 +43,10 @@ export const saveName = (nodeId, name) => ({
 
 export const selectNode = (nodeId) => ({
   type: SELECT_NODE,
+  nodeId
+})
+
+export const toggleCollapseMany = (nodeId) => ({
+  type: TOGGLE_COLLAPSE_MANY,
   nodeId
 })

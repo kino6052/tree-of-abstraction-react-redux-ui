@@ -22,9 +22,9 @@ export const handleRemoveClickGenerator = (that) => {
   return e => {
     e.preventDefault()
 
-    const { removeChild, deleteNode, parentId, id } = that.props
-    removeChild(parentId, id)
-    deleteNode(id)
+    const { toggleCollapseMany, deleteNode, parentId, id } = that.props
+    toggleCollapseMany(id)
+    // deleteNode(id)
   }
 }
 
@@ -41,7 +41,6 @@ export const handleChangeNameClickGenerator = (that) => {
       editName: !that.state.editName
     })
     selectNode(id);
-    console.log(that.state.editName);
   }
 }
 

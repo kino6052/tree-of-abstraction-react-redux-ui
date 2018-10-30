@@ -35,42 +35,45 @@ export class Node extends Component {
     let handleNameChange = handleNameChangeGenerator(this);
     let renderChild = renderChildGenerator(this);
 
-    const { counter, parentId, childIds, name: nodeName } = this.props
+    const { counter, parentId, childIds, name: nodeName, collapsed } = this.props
     const {
       state: {
         editName,
         name
       }
     } = this;
-    return (
-      <div>
-        {
-          !editName &&
-          <Name
-            name={ nodeName }
-            onClick={handleChangeNameClick}
-          />
-        }
-        {
-          editName &&
-          (
-            <div>
-              <NameInput
-                onChange={handleNameChange}
-                onClickSave={handleSaveNameClick}
-                onClickCancel={handleChangeNameClick}
-              />
-              <Note/>
-            </div>
-          )
-        }
-        <Link parentId={parentId} onClick={handleRemoveClick}/>
-        <ul>
-          {childIds.map(renderChild)}
-          <AddButton onClick={ handleAddChildClick }/>
-        </ul>
-      </div>
-    )
+    if (!collapsed) {
+      return (
+        <div>
+          {
+            !editName &&
+            <Name
+              name={ nodeName }
+              onClick={handleChangeNameClick}
+            />
+          }
+          {
+            editName &&
+            (
+              <div>
+                <NameInput
+                  onChange={handleNameChange}
+                  onClickSave={handleSaveNameClick}
+                  onClickCancel={handleChangeNameClick}
+                />
+                <Note/>
+              </div>
+            )
+          }
+          <Link parentId={parentId} onClick={handleRemoveClick}/>
+          <ul>
+            {childIds.map(renderChild)}
+            <AddButton onClick={ handleAddChildClick }/>
+          </ul>
+        </div>
+      )
+    }
+    return null;
   }
 }
 
