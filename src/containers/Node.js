@@ -64,7 +64,6 @@ export class Node extends Component {
             </div>
           )
         }
-        <button onClick={handleIncrementClick}>+</button>
         <Link parentId={parentId} onClick={handleRemoveClick}/>
         <ul>
           {childIds.map(renderChild)}

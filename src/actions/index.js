@@ -4,6 +4,7 @@ export const DELETE_NODE = 'DELETE_NODE'
 export const ADD_CHILD = 'ADD_CHILD'
 export const REMOVE_CHILD = 'REMOVE_CHILD'
 export const SAVE_NAME = 'SAVE_NAME'
+export const SELECT_NODE = 'SELECT_NODE'
 
 export const increment = (nodeId) => ({
   type: INCREMENT,
@@ -37,4 +38,9 @@ export const saveName = (nodeId, name) => ({
   type: SAVE_NAME,
   nodeId,
   name
+})
+
+export const selectNode = (nodeId) => ({
+  type: SELECT_NODE,
+  nodeId
 })

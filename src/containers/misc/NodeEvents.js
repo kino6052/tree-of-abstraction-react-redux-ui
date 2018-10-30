@@ -30,10 +30,17 @@ export const handleRemoveClickGenerator = (that) => {
 
 export const handleChangeNameClickGenerator = (that) => {
   return e => {
+    let {
+      props: {
+        id,
+        selectNode
+      }
+    } = that;
     e.preventDefault()
     that.setState({
       editName: !that.state.editName
     })
+    selectNode(id);
     console.log(that.state.editName);
   }
 }
@@ -69,7 +76,7 @@ export const handleNameChangeGenerator = (that) => {
       }
     } = that;
     // saveName(name, id)
-    console.log(that.state);
+
     that.setState({
       name: e.target.value
     })
