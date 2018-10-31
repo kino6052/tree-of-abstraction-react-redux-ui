@@ -61,8 +61,8 @@ const toggleCollapseMany = (state, ids) => {
 }
 
 export default (state = {}, action) => {
-  const { nodeId } = action
-  if (typeof nodeId === 'undefined') {
+  const { nodeId, tree } = action
+  if (typeof nodeId === 'undefined' && !tree) {
     return state
   }
 
@@ -74,6 +74,10 @@ export default (state = {}, action) => {
   if (action.type === TOGGLE_COLLAPSE_MANY) {
     const descendantIds = getAllDescendantIds(state, nodeId)
     return toggleCollapseMany(state, descendantIds)
+  }
+
+  if (action.type === 'SET_TREE') {
+    return tree;
   }
 
   return {

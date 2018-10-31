@@ -44,21 +44,25 @@ const  generateItemTree = (itemJson, itemChildJson) => {
     let currentNode = itemsMap[currentId];
     let currentChildren = itemChildrenMap[currentId];
     if (currentNode) {
-      currentNode.children = currentChildren || [];
-      result = [...result, currentNode];
+      currentNode.childIds = currentChildren || [];
+      currentNode.id = currentNode['_id'];
+      itemsMap[currentNode.id] = currentNode;
       if (currentChildren) {
           queue = [...currentChildren, ...queue]
       }
     }
   }
-  console.log(result);
+  return itemsMap;
 }
 
 export function* fetchItems() {
   console.log('Hello Sagas!')
   let itemJson = yield call(fetchItemsHelper)
   let itemChildJson = yield call(fetchItemChildrenHelper)
-  yield call(generateItemTree, itemJson, itemChildJson)
+  console.log('Generating result');
+  let result = yield call(generateItemTree, itemJson, itemChildJson)
+  console.log(result)
+  yield put({ type: 'SET_TREE', tree: result || []});
 }
 
 export async function* fetchItemChildren() {

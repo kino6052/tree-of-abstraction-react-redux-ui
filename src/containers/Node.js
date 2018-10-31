@@ -35,14 +35,15 @@ export class Node extends Component {
     let handleNameChange = handleNameChangeGenerator(this);
     let renderChild = renderChildGenerator(this);
 
-    const { counter, parentId, childIds, name: nodeName, collapsed } = this.props
+    const { counter, parentId, childIds, title: nodeName, collapsed } = this.props
+    // console.log(this.props);
     const {
       state: {
         editName,
         name
       }
     } = this;
-    if (!collapsed) {
+    if (true) {
       return (
         <div>
           {
@@ -66,10 +67,14 @@ export class Node extends Component {
             )
           }
           <Link parentId={parentId} onClick={handleRemoveClick}/>
-          <ul>
-            {childIds.map(renderChild)}
-            <AddButton onClick={ handleAddChildClick }/>
-          </ul>
+          {
+            childIds && (
+              <ul>
+                {childIds.map(renderChild)}
+                <AddButton onClick={ handleAddChildClick }/>
+              </ul>
+            )
+          }
         </div>
       )
     }

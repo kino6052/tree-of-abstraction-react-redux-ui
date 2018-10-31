@@ -87,7 +87,7 @@ export const renderChildGenerator = (that) => {
     const { id } = that.props
     return (
       <li key={childId}>
-        <ConnectedNode id={childId} parentId={id} />
+        <ConnectedNode id={childId} parentId={id} title />
       </li>
     )
   }
