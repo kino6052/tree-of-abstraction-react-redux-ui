@@ -73,7 +73,6 @@ export class Node extends Component {
             }
             <AddButton onClick={ handleAddChildClick }/>
             <EditButton onClick={ handleChangeNameClick }/>
-            <RemoveButton onClick={ handleRemoveClick }/>
           </div>
           {
             <div>
