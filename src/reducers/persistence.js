@@ -16,24 +16,25 @@ export default (state = DEFAULT, action) => {
     changedNodes,
     removedNodes
   } = state;
+  console.log('Persistence');
   switch (action.type) {
     case SAVE_NAME:
-      addedNodes = addedNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
+      changedNodes = changedNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
       return {
         ...state,
-        changedNodes: [...state.changedNodes, nodeId]
+        changedNodes: [...changedNodes, nodeId]
       }
     case DELETE_NODE:
       removedNodes = removedNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
       return {
         ...state,
-        removedNodes: [...state.removedNodes, nodeId]
+        removedNodes: [...removedNodes, nodeId]
       }
     case CREATE_NODE:
       addedNodes = addedNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
       return {
         ...state,
-        addedNodes: [...state.addedNodes, nodeId]
+        addedNodes: [...addedNodes, nodeId]
       }
     default:
       return state;
