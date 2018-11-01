@@ -86,7 +86,7 @@ export const handleNameChangeGenerator = (that) => {
 
 export const renderChildGenerator = (that) => {
   return childId => {
-    const { id } = that.props
+    const { id, collapsed } = that.props
     return (
       <li key={childId}>
         <ConnectedNode id={childId} parentId={id} title />

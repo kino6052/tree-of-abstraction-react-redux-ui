@@ -16,6 +16,8 @@ import { Link } from './misc/components/Link'
 import { AddButton } from './misc/components/Buttons'
 import { Note } from './Note'
 
+import './node.css';
+
 export class Node extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +38,6 @@ export class Node extends Component {
     let renderChild = renderChildGenerator(this);
 
     const { counter, parentId, childIds, title: nodeTitle, collapsed, id } = this.props
-    // console.log(this.props);
     const {
       state: {
         editName,
@@ -45,35 +46,39 @@ export class Node extends Component {
     } = this;
     if (!collapsed) {
       return (
-        <div>
+        <div className={'Node'}>
+          <div className={'Controls'} >
+            <Link className={'.Collapse'} parentId={parentId} onClick={handleRemoveClick}/>
+            {
+              !editName &&
+              <Name
+                title={ nodeTitle }
+                onClick={handleChangeNameClick}
+              />
+            }
+            {
+              editName &&
+              (
+                <div>
+                  <NameInput
+                    onChange={handleNameChange}
+                    onClickSave={handleSaveNameClick}
+                    onClickCancel={handleChangeNameClick}
+                  />
+                  <Note/>
+                </div>
+              )
+            }
+            <AddButton onClick={ handleAddChildClick }/>
+          </div>
           {
-            !editName &&
-            <Name
-              title={ nodeTitle }
-              onClick={handleChangeNameClick}
-            />
-          }
-          {
-            editName &&
-            (
-              <div>
-                <NameInput
-                  onChange={handleNameChange}
-                  onClickSave={handleSaveNameClick}
-                  onClickCancel={handleChangeNameClick}
-                />
-                <Note/>
-              </div>
-            )
-          }
-          <Link parentId={parentId} onClick={handleRemoveClick}/>
-          {
-            childIds && (
-              <ul>
-                {childIds.map(renderChild)}
-                <AddButton onClick={ handleAddChildClick }/>
-              </ul>
-            )
+            <div>
+              { childIds && (
+                <ul className={'Children'}>
+                  { childIds.map(renderChild) }
+                </ul>
+              ) }
+            </div>
           }
         </div>
       )

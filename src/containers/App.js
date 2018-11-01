@@ -26,7 +26,6 @@ export class App extends Component {
         actions
       } = {}
     } = this;
-    console.log('here');
     if (id) {
       return (<Node {...this.props} collapsed={false}/>)
     } else {

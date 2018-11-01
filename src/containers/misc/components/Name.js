@@ -9,7 +9,7 @@ export class Name extends React.Component {
       }
     } = this;
     return (
-      <p onClick={onClick}>
+      <p className={'Title'} onClick={onClick}>
         Name: { title }
       </p>
     )

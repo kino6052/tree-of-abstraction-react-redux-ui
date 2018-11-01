@@ -1,0 +1,24 @@
+.Node {
+  display: flex;
+  flex-direction: column;
+}
+
+.Controls {
+  display: flex;
+  flex-direction: row;
+}
+
+.Collapse,.Link,.Title,.Add {
+  margin: 10px;
+}
+
+.Add {
+  text-decoration: none;
+  color: black;
+  font-size: 10px;
+  line-height: 16px;
+}
+
+li {
+  list-style-type: none;
+}

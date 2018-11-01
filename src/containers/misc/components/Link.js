@@ -9,8 +9,7 @@ export class Link extends React.Component {
       }
     } = this;
     return (
-      typeof parentId !== 'undefined' &&
-      <a onClick={onClick} style={{ color: 'lightgray', textDecoration: 'none' }}>
+      <a className={'Link'} onClick={onClick} style={{ color: 'lightgray', textDecoration: 'none' }}>
         ×
       </a>
     )

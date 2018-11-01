@@ -6,13 +6,13 @@ export class AddButton extends React.Component {
       onClick
     } = this;
     return (
-      <li key="add">
+      <div className={'Add'} key="add">
         <a href="#" // eslint-disable-line jsx-a11y/anchor-is-valid
           onClick={onClick}
         >
           Add child
         </a>
-      </li>
+      </div>
     )
   }
 }
