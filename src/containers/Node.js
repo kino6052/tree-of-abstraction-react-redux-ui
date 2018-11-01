@@ -83,7 +83,7 @@ export class Node extends Component {
         </div>
       )
     }
-    return null;
+    return null
   }
 }
 
