@@ -45,10 +45,8 @@ const getAllDescendantIds = (state, nodeId) => {
     childIds = []
   } = state[nodeId] || {};
   let t = childIds.reduce((acc, childId) => {
-    console.log(childId);
     return [ ...acc, childId, ...getAllDescendantIds(state, childId) ]
   }, [])
-  console.log(t);
   return t || [];
 }
 
