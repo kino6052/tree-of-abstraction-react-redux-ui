@@ -50,6 +50,16 @@ const getAllDescendantIds = (state, nodeId) => {
   return t || [];
 }
 
+const getImmediateDescendantIds = (state, nodeId) => {
+  let {
+    childIds = []
+  } = state[nodeId] || {};
+  let t = childIds.reduce((acc, childId) => {
+    return [ ...acc, childId ]
+  }, [])
+  return t || [];
+}
+
 const deleteMany = (state, ids) => {
   state = { ...state }
   ids.forEach(id => delete state[id])
@@ -79,14 +89,13 @@ export default (state = {}, action) => {
   }
 
   if (action.type === TOGGLE_COLLAPSE_MANY) {
-    let descendantIds = getAllDescendantIds(state, nodeId) || []
+    let descendantIds = getImmediateDescendantIds(state, nodeId) || []
     return toggleCollapseMany(state, descendantIds)
   }
 
   if (action.type === 'SET_TREE') {
     return tree;
   }
-
   return {
     ...state,
     [nodeId]: node(state[nodeId], action)

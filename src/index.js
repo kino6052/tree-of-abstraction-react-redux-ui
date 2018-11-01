@@ -13,7 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 // const tree = generateTree()
 const store = createStore(
   reducer,
-  { nodes: { '5b6605a886ec2e1a5a713867': { id: '5b6605a886ec2e1a5a713867', title: 'ROOT', collapsed: false } } },
+  { nodes: { '5b6605a886ec2e1a5a713867': { id: '5b6605a886ec2e1a5a713867', title: 'ROOT', collapsed: false, childIds: [] } } },
   compose(
     applyMiddleware(thunk),
     applyMiddleware(sagaMiddleware),

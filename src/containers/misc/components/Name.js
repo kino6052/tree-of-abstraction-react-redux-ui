@@ -10,7 +10,7 @@ export class Name extends React.Component {
     } = this;
     return (
       <p className={'Title'} onClick={onClick}>
-        Name: { title }
+        { typeof title === 'string' && title !== '' ? title : '...' }
       </p>
     )
   }

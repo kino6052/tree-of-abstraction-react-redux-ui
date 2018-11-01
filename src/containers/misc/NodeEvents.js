@@ -12,6 +12,7 @@ export const handleIncrementClickGenerator = (that) => {
 export const handleAddChildClickGenerator = (that) => {
   return e => {
     e.preventDefault()
+    console.log('here');
     const { addChild, createNode, id } = that.props
     const childId = createNode().nodeId
     addChild(id, childId)
@@ -36,7 +37,6 @@ export const handleChangeNameClickGenerator = (that) => {
         selectNode
       }
     } = that;
-    console.log('changeName');
     e.preventDefault()
     that.setState({
       editName: !that.state.editName

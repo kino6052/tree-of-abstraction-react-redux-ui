@@ -48,7 +48,7 @@ export class Node extends Component {
       return (
         <div className={'Node'}>
           <div className={'Controls'} >
-            <Link className={'.Collapse'} parentId={parentId} onClick={handleRemoveClick}/>
+            <Link className={'.Collapse'} parentId={parentId} onClick={handleRemoveClick} collapsed={collapsed}/>
             {
               !editName &&
               <Name
