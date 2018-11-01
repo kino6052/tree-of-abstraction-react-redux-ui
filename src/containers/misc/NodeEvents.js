@@ -24,8 +24,16 @@ export const handleRemoveClickGenerator = (that) => {
     e.preventDefault()
 
     const { toggleCollapseMany, deleteNode, parentId, id } = that.props
+    deleteNode(id)
+  }
+}
+
+export const handleCollapseClickGenerator = (that) => {
+  return e => {
+    e.preventDefault()
+
+    const { toggleCollapseMany, deleteNode, parentId, id } = that.props
     toggleCollapseMany(id)
-    // deleteNode(id)
   }
 }
 

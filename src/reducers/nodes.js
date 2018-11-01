@@ -63,6 +63,7 @@ const getImmediateDescendantIds = (state, nodeId) => {
 const deleteMany = (state, ids) => {
   state = { ...state }
   ids.forEach(id => delete state[id])
+  // TODO: Remove from parent ChildIds
   return state
 }
 
@@ -85,6 +86,7 @@ export default (state = {}, action) => {
 
   if (action.type === DELETE_NODE) {
     let descendantIds = getAllDescendantIds(state, nodeId)
+    // TODO: Add to persistence
     return deleteMany(state, [ nodeId, ...descendantIds ])
   }
 

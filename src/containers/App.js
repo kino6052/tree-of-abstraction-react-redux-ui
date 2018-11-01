@@ -17,6 +17,8 @@ import { AddButton } from './misc/components/Buttons'
 import { Node } from './Node'
 import { Note } from './Note'
 
+import './app.css';
+
 export class App extends Component {
   render() {
     let {
@@ -29,8 +31,10 @@ export class App extends Component {
     } = this;
     if (id) {
       return (
-        <div>
-          <Node {...this.props} collapsed={false}/>
+        <div className={'App'}>
+          <div className={'NodeContainer'}>
+            <Node {...this.props} collapsed={false}/>
+          </div>
           <Note />
         </div>
       )

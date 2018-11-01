@@ -6,6 +6,7 @@ import {
   handleIncrementClickGenerator,
   handleAddChildClickGenerator,
   handleRemoveClickGenerator,
+  handleCollapseClickGenerator,
   handleChangeNameClickGenerator,
   handleSaveNameClickGenerator,
   handleNameChangeGenerator,
@@ -14,7 +15,7 @@ import {
 } from './misc/NodeEvents';
 import { Name, NameInput} from './misc/components/Name'
 import { Link } from './misc/components/Link'
-import { AddButton, EditButton } from './misc/components/Buttons'
+import { AddButton, EditButton, RemoveButton } from './misc/components/Buttons'
 
 import './node.css';
 
@@ -32,6 +33,7 @@ export class Node extends Component {
     let handleIncrementClick = handleIncrementClickGenerator(this);
     let handleAddChildClick = handleAddChildClickGenerator(this);
     let handleRemoveClick = handleRemoveClickGenerator(this);
+    let handleCollapseManyClick = handleCollapseClickGenerator(this);
     let handleChangeNameClick = handleChangeNameClickGenerator(this);
     let handleSaveNameClick = handleSaveNameClickGenerator(this);
     let handleNameChange = handleNameChangeGenerator(this);
@@ -47,9 +49,9 @@ export class Node extends Component {
     } = this;
     if (!collapsed) {
       return (
-        <div className={'Node'}>
+        <div className={'Node'} id={id}>
           <div className={'Controls'} >
-            <Link className={'.Collapse'} parentId={parentId} onClick={handleRemoveClick} collapsed={collapsed}/>
+            <Link className={'.Collapse'} parentId={parentId} onClick={handleCollapseManyClick} collapsed={collapsed}/>
             {
               !editName &&
               <Name
@@ -71,6 +73,7 @@ export class Node extends Component {
             }
             <AddButton onClick={ handleAddChildClick }/>
             <EditButton onClick={ handleChangeNameClick }/>
+            <RemoveButton onClick={ handleRemoveClick }/>
           </div>
           {
             <div>
