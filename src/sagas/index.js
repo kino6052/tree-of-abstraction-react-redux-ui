@@ -47,6 +47,7 @@ const  generateItemTree = (itemJson, itemChildJson) => {
       currentNode.childIds = currentChildren || [];
       currentNode.id = currentNode['_id'];
       currentNode.parentId = currentNode['_id'];
+      currentNode.collapsed = true;
       itemsMap[currentNode.id] = currentNode;
       if (currentChildren) {
           queue = [...currentChildren, ...queue]
