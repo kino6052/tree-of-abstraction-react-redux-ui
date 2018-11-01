@@ -13,7 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 // const tree = generateTree()
 const store = createStore(
   reducer,
-  { '5b6605a886ec2e1a5a713867': { id: '5b6605a886ec2e1a5a713867', name: 'ROOT' } },
+  { nodes: { '5b6605a886ec2e1a5a713867': { id: '5b6605a886ec2e1a5a713867', title: 'ROOT', collapsed: false } } },
   compose(
     applyMiddleware(thunk),
     applyMiddleware(sagaMiddleware),
@@ -25,7 +25,7 @@ sagaMiddleware.run(rootSaga);
 
 render(
   <Provider store={store}>
-    <App id={'5b6605a886ec2e1a5a713867'} name='ROOT' />
+    <App />
   </Provider>,
   document.getElementById('root')
 )

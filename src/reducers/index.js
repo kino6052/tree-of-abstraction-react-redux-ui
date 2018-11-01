@@ -40,11 +40,17 @@ const node = (state, action) => {
   }
 }
 
-const getAllDescendantIds = (state, nodeId) => (
-  state[nodeId].childIds.reduce((acc, childId) => (
-    [ ...acc, childId, ...getAllDescendantIds(state, childId) ]
-  ), [])
-)
+const getAllDescendantIds = (state, nodeId) => {
+  let {
+    childIds = []
+  } = state[nodeId] || {};
+  let t = childIds.reduce((acc, childId) => {
+    console.log(childId);
+    return [ ...acc, childId, ...getAllDescendantIds(state, childId) ]
+  }, [])
+  console.log(t);
+  return t || [];
+}
 
 const deleteMany = (state, ids) => {
   state = { ...state }
@@ -55,7 +61,10 @@ const deleteMany = (state, ids) => {
 const toggleCollapseMany = (state, ids) => {
   state = { ...state }
   ids.forEach(id => {
-    state[id] = { ...state[id], collapsed: !state[id].collapsed }
+    let {
+      collapsed = false
+    } = state[id] || {}
+    state[id] = { ...state[id], 'collapsed': !collapsed }
   })
   return state
 }
@@ -67,12 +76,12 @@ export default (state = {}, action) => {
   }
 
   if (action.type === DELETE_NODE) {
-    const descendantIds = getAllDescendantIds(state, nodeId)
+    let descendantIds = getAllDescendantIds(state, nodeId)
     return deleteMany(state, [ nodeId, ...descendantIds ])
   }
 
   if (action.type === TOGGLE_COLLAPSE_MANY) {
-    const descendantIds = getAllDescendantIds(state, nodeId)
+    let descendantIds = getAllDescendantIds(state, nodeId) || []
     return toggleCollapseMany(state, descendantIds)
   }
 

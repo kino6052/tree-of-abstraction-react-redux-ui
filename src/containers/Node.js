@@ -35,7 +35,7 @@ export class Node extends Component {
     let handleNameChange = handleNameChangeGenerator(this);
     let renderChild = renderChildGenerator(this);
 
-    const { counter, parentId, childIds, title: nodeName, collapsed } = this.props
+    const { counter, parentId, childIds, title: nodeName, collapsed, id } = this.props
     // console.log(this.props);
     const {
       state: {
@@ -43,7 +43,7 @@ export class Node extends Component {
         name
       }
     } = this;
-    if (true) {
+    if (!collapsed) {
       return (
         <div>
           {

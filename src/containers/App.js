@@ -20,15 +20,15 @@ export class App extends Component {
   render() {
     let {
       props: {
-        root: {
-          id,
-          childIds,
-          title
-        } = {}
+        id,
+        childIds,
+        title,
+        actions
       } = {}
     } = this;
+    console.log('here');
     if (id) {
-      return (<Node id={id} childIds={childIds} title={title}/>)
+      return (<Node {...this.props} collapsed={false}/>)
     } else {
       return null;
     }
@@ -36,8 +36,8 @@ export class App extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return { root: state.nodes['5b6605a886ec2e1a5a713867'] }
+  return state.nodes['5b6605a886ec2e1a5a713867'];
 }
 
-const ConnectedApp = connect(mapStateToProps)(App)
+const ConnectedApp = connect(mapStateToProps, actions)(App)
 export default ConnectedApp
