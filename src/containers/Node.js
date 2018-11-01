@@ -9,12 +9,12 @@ import {
   handleChangeNameClickGenerator,
   handleSaveNameClickGenerator,
   handleNameChangeGenerator,
+  handleSelectNodeGenerator,
   renderChildGenerator
 } from './misc/NodeEvents';
 import { Name, NameInput} from './misc/components/Name'
 import { Link } from './misc/components/Link'
-import { AddButton } from './misc/components/Buttons'
-import { Note } from './Note'
+import { AddButton, EditButton } from './misc/components/Buttons'
 
 import './node.css';
 
@@ -35,6 +35,7 @@ export class Node extends Component {
     let handleChangeNameClick = handleChangeNameClickGenerator(this);
     let handleSaveNameClick = handleSaveNameClickGenerator(this);
     let handleNameChange = handleNameChangeGenerator(this);
+    let handleSelectNodeClick = handleSelectNodeGenerator(this);
     let renderChild = renderChildGenerator(this);
 
     const { counter, parentId, childIds, title: nodeTitle, collapsed, id } = this.props
@@ -53,7 +54,7 @@ export class Node extends Component {
               !editName &&
               <Name
                 title={ nodeTitle }
-                onClick={handleChangeNameClick}
+                onClick={handleSelectNodeClick}
               />
             }
             {
@@ -65,11 +66,11 @@ export class Node extends Component {
                     onClickSave={handleSaveNameClick}
                     onClickCancel={handleChangeNameClick}
                   />
-                  <Note/>
                 </div>
               )
             }
             <AddButton onClick={ handleAddChildClick }/>
+            <EditButton onClick={ handleChangeNameClick }/>
           </div>
           {
             <div>

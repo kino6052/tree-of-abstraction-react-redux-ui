@@ -15,6 +15,7 @@ import { Name, NameInput} from './misc/components/Name'
 import { Link } from './misc/components/Link'
 import { AddButton } from './misc/components/Buttons'
 import { Node } from './Node'
+import { Note } from './Note'
 
 export class App extends Component {
   render() {
@@ -27,7 +28,12 @@ export class App extends Component {
       } = {}
     } = this;
     if (id) {
-      return (<Node {...this.props} collapsed={false}/>)
+      return (
+        <div>
+          <Node {...this.props} collapsed={false}/>
+          <Note />
+        </div>
+      )
     } else {
       return null;
     }

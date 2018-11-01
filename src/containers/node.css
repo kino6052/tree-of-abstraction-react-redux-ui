@@ -8,11 +8,11 @@
   flex-direction: row;
 }
 
-.Collapse,.Link,.Title,.Add {
+.Collapse,.Link,.Title,.Add,.Edit {
   margin: 10px;
 }
 
-.Add {
+.Add, .Edit {
   text-decoration: none;
   color: black;
   font-size: 10px;

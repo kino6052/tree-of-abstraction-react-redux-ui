@@ -41,6 +41,18 @@ export const handleChangeNameClickGenerator = (that) => {
     that.setState({
       editName: !that.state.editName
     })
+  }
+}
+
+export const handleSelectNodeGenerator = (that) => {
+  return e => {
+    let {
+      props: {
+        id,
+        selectNode
+      }
+    } = that;
+    e.preventDefault()
     selectNode(id);
   }
 }
