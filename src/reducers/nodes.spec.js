@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze'
-import reducer from './index'
+import reducer from './nodes'
 import { increment, createNode, deleteNode, addChild, removeChild, saveName } from '../actions'
 
 describe('reducer', () => {

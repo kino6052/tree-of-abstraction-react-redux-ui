@@ -6,6 +6,7 @@ export const REMOVE_CHILD = 'REMOVE_CHILD'
 export const SAVE_NAME = 'SAVE_NAME'
 export const SELECT_NODE = 'SELECT_NODE'
 export const TOGGLE_COLLAPSE_MANY = 'TOGGLE_COLLAPSE_MANY'
+
 export const FETCH_ITEMS = 'FETCH_ITEMS'
 export const FETCH_NOTES = 'FETCH_NOTES'
 export const FETCH_ITEM_NOTES = 'FETCH_ITEM_NOTES'

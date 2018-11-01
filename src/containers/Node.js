@@ -35,12 +35,12 @@ export class Node extends Component {
     let handleNameChange = handleNameChangeGenerator(this);
     let renderChild = renderChildGenerator(this);
 
-    const { counter, parentId, childIds, title: nodeName, collapsed, id } = this.props
+    const { counter, parentId, childIds, title: nodeTitle, collapsed, id } = this.props
     // console.log(this.props);
     const {
       state: {
         editName,
-        name
+        title
       }
     } = this;
     if (!collapsed) {
@@ -49,7 +49,7 @@ export class Node extends Component {
           {
             !editName &&
             <Name
-              name={ nodeName }
+              title={ nodeTitle }
               onClick={handleChangeNameClick}
             />
           }

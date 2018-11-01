@@ -27,7 +27,7 @@ const node = (state, action) => {
     case SAVE_NAME:
       return {
         ...state,
-        name: action.name
+        title: action.name
       }
     case ADD_CHILD:
     case REMOVE_CHILD:

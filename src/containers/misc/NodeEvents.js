@@ -36,6 +36,7 @@ export const handleChangeNameClickGenerator = (that) => {
         selectNode
       }
     } = that;
+    console.log('changeName');
     e.preventDefault()
     that.setState({
       editName: !that.state.editName
@@ -51,14 +52,15 @@ export const handleSaveNameClickGenerator = (that) => {
     let {
       state: {
         editName,
-        name
+        title
       },
       props: {
         saveName,
         id
       }
     } = that;
-    saveName(id, name)
+
+    saveName(id, title)
     that.setState({
       editName: !editName
     })
@@ -71,13 +73,13 @@ export const handleNameChangeGenerator = (that) => {
     // saveName (state.name, id)
     let {
       state: {
-        name
+        title
       }
     } = that;
     // saveName(name, id)
 
     that.setState({
-      name: e.target.value
+      title: e.target.value
     })
   }
 }

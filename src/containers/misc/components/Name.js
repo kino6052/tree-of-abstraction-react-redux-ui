@@ -5,12 +5,12 @@ export class Name extends React.Component {
     let {
       props: {
         onClick,
-        name
+        title
       }
     } = this;
     return (
       <p onClick={onClick}>
-        Name: { name }
+        Name: { title }
       </p>
     )
   }

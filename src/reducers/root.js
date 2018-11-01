@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import NodeReducer from '.';
+import NodeReducer from './nodes';
 import Selected from './selected';
 
 export default combineReducers({
