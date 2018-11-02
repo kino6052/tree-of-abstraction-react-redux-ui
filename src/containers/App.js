@@ -21,6 +21,7 @@ export class App extends Component {
       return (
         <div className={'App'}>
           <div className={'NodeContainer'}>
+            <h1> Hierarchy </h1>
             <Node {...this.props} collapsed={false}/>
           </div>
           <Note />

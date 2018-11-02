@@ -13,6 +13,7 @@
 }
 
 .Add, .Edit {
+  display: inline-block;
   text-decoration: none;
   color: black;
   font-size: 10px;
