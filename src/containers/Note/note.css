@@ -1,0 +1,7 @@
+.TitleInput,.ContentArea {
+  width: 100%;
+}
+
+.ContentArea {
+  height: 200px;
+}

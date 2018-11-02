@@ -12,13 +12,11 @@ body {
   flex-grow: 2;
   overflow-x: scroll;
   max-width: 1000px;
-  margin: 24px;
 }
 
 .Note {
   flex-grow: 1;
   border-left: 1px solid grey;
-  padding-left: 24px;
   min-width: 400px;
   max-width: 600px;
   overflow-y: scroll;

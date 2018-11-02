@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
-
+import './note.css';
 
 class NoteBlock extends React.Component {
   constructor(props){
@@ -12,16 +13,27 @@ class NoteBlock extends React.Component {
       content: ''
     }
     this.handleEditClick = this.handleEditClick.bind(this);
+    this.handleSaveClick = this.handleSaveClick.bind(this);
+    this.handleCancelClick = this.handleCancelClick.bind(this);
   }
 
   handleEditClick(){
+    this.setState({ editNote: true });
+  }
+
+  handleCancelClick(){
+    this.setState({ editNote: false });
+  }
+
+  handleSaveClick(){
     let {
-      state: {
-        editNote = false
-      } = {}
-    } = this || {};
-    console.log('here');
-    this.setState({ editNote: !editNote });
+      props: {
+        id,
+        content,
+        saveNote
+      }
+    } = this;
+    saveNote(id, content)
   }
 
   render() {
@@ -38,7 +50,7 @@ class NoteBlock extends React.Component {
     return (
       <div>
         { !editNote &&
-            <div key={id} id={id}>
+          <div key={id} id={id}>
             <b>{title}</b>
             <div className='Edit' onClick={this.handleEditClick}>Edit</div>
             <p>{content}</p>
@@ -46,9 +58,10 @@ class NoteBlock extends React.Component {
         }
         { editNote &&
           <div key={id} id={id}>
-            <input></input>
-            <button>Save</button>
-            <button>Cancel</button>
+            <input className={'TitleInput'} value={title}></input>
+            <textarea className={'ContentArea'} value={content}></textarea>
+            <button onClick={this.handleSaveClick}>Save</button>
+            <button onClick={this.handleCancelClick}>Cancel</button>
           </div>
         }
       </div>
@@ -95,4 +108,4 @@ const mapStateToProps = (state) => {
   return { notes, currentNotes };
 }
 
-export default connect(mapStateToProps)(Note)
+export default connect(mapStateToProps, actions)(Note)
