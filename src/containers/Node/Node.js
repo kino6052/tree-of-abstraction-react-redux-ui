@@ -1,7 +1,7 @@
 import React from 'react'
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../actions'
+import * as actions from '../../actions'
 import {
   handleIncrementClickGenerator,
   handleAddChildClickGenerator,
@@ -12,10 +12,10 @@ import {
   handleNameChangeGenerator,
   handleSelectNodeGenerator,
   renderChildGenerator
-} from './misc/NodeEvents';
-import { Name, NameInput} from './misc/components/Name'
-import { Link } from './misc/components/Link'
-import { AddButton, EditButton, RemoveButton } from './misc/components/Buttons'
+} from './auxilary-functions';
+import { Name, NameInput} from './components/Name'
+import { Link } from './components/Link'
+import { AddButton, EditButton, RemoveButton } from './components/Buttons'
 
 import './node.css';
 

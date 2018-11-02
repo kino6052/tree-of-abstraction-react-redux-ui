@@ -1,6 +1,6 @@
 import React from 'react';
 import * as actions from '../../actions';
-import ConnectedNode from '../Node';
+import ConnectedNode from './Node';
 
 export const handleIncrementClickGenerator = (that) => {
   return () => {

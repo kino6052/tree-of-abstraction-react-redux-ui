@@ -2,20 +2,8 @@ import React from 'react'
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
-import {
-  handleIncrementClickGenerator,
-  handleAddChildClickGenerator,
-  handleRemoveClickGenerator,
-  handleChangeNameClickGenerator,
-  handleSaveNameClickGenerator,
-  handleNameChangeGenerator,
-  renderChildGenerator
-} from './misc/NodeEvents';
-import { Name, NameInput} from './misc/components/Name'
-import { Link } from './misc/components/Link'
-import { AddButton } from './misc/components/Buttons'
-import { Node } from './Node'
-import Note from './Note'
+import Note from './Note/Note'
+import { Node } from './Node/Node'
 
 import './app.css';
 

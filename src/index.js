@@ -4,11 +4,9 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
-import reducer from './reducers/root'
-import generateTree from './generateTree'
-import Node from './containers/Node'
-import App from './containers/App'
-import { rootSaga } from './sagas'
+import reducer from './reducers/root';
+import App from './containers/App';
+import { rootSaga } from './sagas';
 const sagaMiddleware = createSagaMiddleware();
 // const tree = generateTree()
 const store = createStore(
