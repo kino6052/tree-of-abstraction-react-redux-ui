@@ -40,7 +40,7 @@ const node = (state, action) => {
   }
 }
 
-const getAllDescendantIds = (state, nodeId) => {
+export const getAllDescendantIds = (state, nodeId) => {
   let {
     childIds = []
   } = state[nodeId] || {};

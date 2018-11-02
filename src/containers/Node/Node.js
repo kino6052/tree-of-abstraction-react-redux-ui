@@ -91,7 +91,7 @@ export class Node extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return state.nodes[ownProps.id]
+  return { ...state.nodes[ownProps.id], notes: state.notes, nodes: state.nodes }  
 }
 
 const ConnectedNode = connect(mapStateToProps, actions)(Node)

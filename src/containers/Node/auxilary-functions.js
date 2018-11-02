@@ -1,6 +1,7 @@
 import React from 'react';
 import * as actions from '../../actions';
 import ConnectedNode from './Node';
+import { getAllDescendantIds } from '../../reducers/nodes';
 
 export const handleIncrementClickGenerator = (that) => {
   return () => {
@@ -57,11 +58,28 @@ export const handleSelectNodeGenerator = (that) => {
     let {
       props: {
         id,
-        selectNode
+        selectNode,
+        notes = [],
+        nodes = {}
       }
     } = that;
     e.preventDefault()
-    selectNode(id);
+    let descendantIds = [...getAllDescendantIds(nodes, id), id];
+    console.log('descendantIds', descendantIds);
+    let selectedNotes = notes.filter(note => {
+      let {
+        itemIds = []
+      } = note;
+      let isContained = false;
+      for (let descendantId of descendantIds) {
+          isContained = isContained || itemIds.find(itemId => itemId === descendantId) ? true : false;
+      }
+      if (isContained){
+        console.log('contained');
+        return note;
+      }
+    })
+    selectNode(id, selectedNotes);
   }
 }
 

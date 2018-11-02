@@ -5,14 +5,14 @@ export class Note extends React.Component {
   render() {
     let {
       props: {
-        notes = []
+        notes = [],
+        currentNotes = []
       } = {}
     } = this;
-    debugger;
     return (
       <div className={'Note'}>
         <h1> Note </h1>
-        { notes.map(
+        { currentNotes.map(
           (note) => {
             let {
               title,
@@ -33,9 +33,12 @@ export class Note extends React.Component {
 
 const mapStateToProps = (state) => {
   let {
-    notes = []
+    notes = [],
+    selected: {
+      currentNotes
+    } = {}
   } = state;
-  return { notes };
+  return { notes, currentNotes };
 }
 
 export default connect(mapStateToProps)(Note)

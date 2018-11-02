@@ -6,11 +6,17 @@ const DEFAULT = {
 }
 
 export default (state = DEFAULT, action) => {
-  switch (action.type) {
+  let {
+    type,
+    nodeId,
+    currentNotes
+  } = action;
+  switch (type) {
     case SELECT_NODE: {
       return {
         ...state,
-        currentNodeId: action.nodeId
+        currentNodeId: nodeId,
+        currentNotes: currentNotes || []
       }
     }
     default:

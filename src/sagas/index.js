@@ -69,6 +69,32 @@ const  generateItemTree = (itemJson, itemChildJson) => {
   return itemsMap;
 }
 
+const generateNotes = (noteJson, itemNoteJson) => {
+  let result = [];
+  let noteJsonMap = noteJson.reduce(
+    (acc, note)=>{
+      let { _id } = note;
+      acc[_id] = note;
+      return acc;
+    },
+    {}
+  )
+  for (let itemNote of itemNoteJson) {
+    let {
+      itemId,
+      noteId
+    } = itemNote;
+    let {
+      itemIds = []
+    } = noteJsonMap[noteId] || {};
+    (noteJsonMap[noteId] || {}).itemIds = [...itemIds, itemId];
+  }
+  for (let noteJsonId in noteJsonMap) {
+    result.push(noteJsonMap[noteJsonId]);
+  }
+  return result;
+}
+
 export function* fetchItems() {
   let itemJson = null;
   let itemChildJson = null;
@@ -98,7 +124,6 @@ export async function* fetchItemChildren() {
 export function* fetchNotes() {
   let noteJson = null;
   let itemNoteJson = null;
-  debugger;
   try {
     noteJson = yield call(fetchNotesHelper)
     itemNoteJson = yield call(fetchItemNotesHelper)
@@ -107,7 +132,8 @@ export function* fetchNotes() {
     console.log('Couldn\'t get note data')
   }
   if (noteJson && itemNoteJson) {
-    yield put({ type: 'SET_NOTES', notes: noteJson || []});
+    let result = yield call(generateNotes, noteJson, itemNoteJson);
+    yield put({ type: 'SET_NOTES', notes: result} );
   }
 }
 

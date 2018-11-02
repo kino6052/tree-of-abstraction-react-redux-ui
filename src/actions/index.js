@@ -46,9 +46,10 @@ export const saveName = (nodeId, name) => ({
   name
 })
 
-export const selectNode = (nodeId) => ({
+export const selectNode = (nodeId, currentNotes) => ({
   type: SELECT_NODE,
-  nodeId
+  nodeId,
+  currentNotes
 })
 
 export const toggleCollapseMany = (nodeId) => ({
