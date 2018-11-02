@@ -15,7 +15,7 @@ import { Name, NameInput} from './misc/components/Name'
 import { Link } from './misc/components/Link'
 import { AddButton } from './misc/components/Buttons'
 import { Node } from './Node'
-import { Note } from './Note'
+import Note from './Note'
 
 import './app.css';
 

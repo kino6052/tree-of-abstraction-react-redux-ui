@@ -15,6 +15,18 @@ const fetchItemChildrenHelper = async () => {
   return json;
 }
 
+const fetchNotesHelper = async () => {
+  let noteResponse = await fetch(`${api_root}/note`);
+  let json = await noteResponse.json();
+  return json;
+}
+
+const fetchItemNotesHelper = async () => {
+  let itemNoteResponse = await fetch(`${api_root}/item-note`);
+  let json = await itemNoteResponse.json();
+  return json;
+}
+
 const  generateItemTree = (itemJson, itemChildJson) => {
   const ROOT = '5b6605a886ec2e1a5a713867';
   let itemsMap = {}
@@ -58,13 +70,22 @@ const  generateItemTree = (itemJson, itemChildJson) => {
 }
 
 export function* fetchItems() {
-  console.log('Hello Sagas!')
-  let itemJson = yield call(fetchItemsHelper)
-  let itemChildJson = yield call(fetchItemChildrenHelper)
-  console.log('Generating result');
-  let result = yield call(generateItemTree, itemJson, itemChildJson)
-  console.log(result)
-  yield put({ type: 'SET_TREE', tree: result || []});
+  let itemJson = null;
+  let itemChildJson = null;
+  try {
+    itemJson = yield call(fetchItemsHelper)
+    itemChildJson = yield call(fetchItemChildrenHelper)
+  } catch (e) {
+    console.warn(e);
+    console.log('Couldn\'t get item data')
+  }
+  if (itemJson && itemChildJson) {
+    console.log('Generating result');
+    let result = yield call(generateItemTree, itemJson, itemChildJson)
+    console.log(result)
+    yield put({ type: 'SET_TREE', tree: result || []});
+    yield put({ type: 'FETCH_NOTES'});
+  }
 }
 
 export async function* fetchItemChildren() {
@@ -74,11 +95,20 @@ export async function* fetchItemChildren() {
   // console.log(json);
 }
 
-export async function* fetchNotes() {
-  console.log('Hello Sagas!')
-  // let test = await fetch(`${api_root}/item`)
-  // let json = await test.json();
-  // console.log(json);
+export function* fetchNotes() {
+  let noteJson = null;
+  let itemNoteJson = null;
+  debugger;
+  try {
+    noteJson = yield call(fetchNotesHelper)
+    itemNoteJson = yield call(fetchItemNotesHelper)
+  } catch (e) {
+    console.warn(e);
+    console.log('Couldn\'t get note data')
+  }
+  if (noteJson && itemNoteJson) {
+    yield put({ type: 'SET_NOTES', notes: noteJson || []});
+  }
 }
 
 export async function* fetchItemNotes() {
