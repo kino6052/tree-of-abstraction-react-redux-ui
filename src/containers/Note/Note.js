@@ -7,14 +7,20 @@ import './note.css';
 class NoteBlock extends React.Component {
   constructor(props){
     super(props);
+    let {
+      title,
+      content
+    } = props;
     this.state = {
       editNote: false,
-      title: '',
-      content: ''
+      title,
+      content
     }
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.handleCancelClick = this.handleCancelClick.bind(this);
+    this.handleOnTitleChange = this.handleOnTitleChange.bind(this);
+    this.handleOnContentChange = this.handleOnContentChange.bind(this);
   }
 
   handleEditClick(){
@@ -22,7 +28,19 @@ class NoteBlock extends React.Component {
   }
 
   handleCancelClick(){
-    this.setState({ editNote: false });
+    let {
+      props: {
+        title,
+        content
+      }
+    } = this;
+    this.setState(
+      {
+        editNote: false,
+        title,
+        content 
+      }
+    );
   }
 
   handleSaveClick(){
@@ -36,15 +54,33 @@ class NoteBlock extends React.Component {
     saveNote(id, content)
   }
 
+  handleOnTitleChange(e){
+    let {
+      target: {
+        value
+      } = {}
+    } = e;
+    this.setState({title: value});
+  }
+
+  handleOnContentChange(e){
+    let {
+      target: {
+        value
+      } = {}
+    } = e;
+    this.setState({content: value});
+  }
+
   render() {
     let {
       state: {
-        editNote
-      } = {},
-      props: {
-        id,
+        editNote,
         title,
         content
+      } = {},
+      props: {
+        id
       }
     } = this;
     return (
@@ -58,8 +94,8 @@ class NoteBlock extends React.Component {
         }
         { editNote &&
           <div key={id} id={id}>
-            <input className={'TitleInput'} value={title}></input>
-            <textarea className={'ContentArea'} value={content}></textarea>
+            <input className={'TitleInput'} onChange={this.handleOnTitleChange} value={title}></input>
+            <textarea className={'ContentArea'} onChange={this.handleOnContentChange} value={content}></textarea>
             <button onClick={this.handleSaveClick}>Save</button>
             <button onClick={this.handleCancelClick}>Cancel</button>
           </div>
