@@ -1,4 +1,4 @@
-import { CREATE_NODE, DELETE_NODE, SAVE_NAME } from '../actions'
+import { CREATE_NODE, DELETE_NODE, SAVE_NAME, SAVE_NOTE } from '../actions'
 
 const DEFAULT = {
   addedItemNodes: [],
@@ -12,12 +12,15 @@ const DEFAULT = {
 export default (state = DEFAULT, action) => {
   let {
     nodeId,
+    noteId,
     name
   } = action;
   let {
     addedItemNodes,
     changedItemNodes,
-    removedItemNodes
+    removedItemNodes,
+    changedNoteNodes,
+    addedNoteNodes
   } = state;
   console.log('Persistence');
   switch (action.type) {
@@ -38,6 +41,13 @@ export default (state = DEFAULT, action) => {
       return {
         ...state,
         addedItemNodes: [...addedItemNodes, nodeId]
+      }
+    case SAVE_NOTE:
+      debugger;
+      changedNoteNodes = changedNoteNodes.filter(id => noteId !== id) // edge case: duplicates of nodeId
+      return {
+        ...state,
+        changedNoteNodes: [...changedNoteNodes, noteId]
       }
     default:
       return state;
