@@ -11,6 +11,7 @@ export const FETCH_ITEMS = 'FETCH_ITEMS'
 export const FETCH_NOTES = 'FETCH_NOTES'
 export const FETCH_ITEM_NOTES = 'FETCH_ITEM_NOTES'
 export const FETCH_ITEM_CHILDREN = 'FETCH_ITEM_CHILDREN'
+export const SAVE_NOTE = 'SAVE_NOTE';
 
 export const increment = (nodeId) => ({
   type: INCREMENT,
@@ -44,6 +45,13 @@ export const saveName = (nodeId, name) => ({
   type: SAVE_NAME,
   nodeId,
   name
+})
+
+export const saveNote = (noteId, title, content) => ({
+  type: SAVE_NOTE,
+  noteId,
+  title,
+  content
 })
 
 export const selectNode = (nodeId, currentNotes) => ({

@@ -38,7 +38,7 @@ class NoteBlock extends React.Component {
       {
         editNote: false,
         title,
-        content 
+        content
       }
     );
   }
@@ -47,11 +47,19 @@ class NoteBlock extends React.Component {
     let {
       props: {
         id,
-        content,
-        saveNote
+        saveNote = (()=>{})
+      },
+      state: {
+        title,
+        content
       }
     } = this;
-    saveNote(id, content)
+    saveNote(id, title, content);
+    this.setState(
+      {
+        editNote: false
+      }
+    );
   }
 
   handleOnTitleChange(e){
@@ -111,7 +119,8 @@ export class Note extends React.Component {
     let {
       props: {
         notes = [],
-        currentNotes = []
+        currentNotes = [],
+        saveNote
       } = {}
     } = this;
     return (
@@ -125,7 +134,7 @@ export class Note extends React.Component {
               _id
             } = note;
             return (
-              <NoteBlock id={_id} title={title} content={content} />
+              <NoteBlock saveNote={saveNote} id={_id} title={title} content={content} />
             );
           }
         ) }
