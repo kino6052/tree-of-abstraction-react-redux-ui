@@ -1,9 +1,12 @@
 import { CREATE_NODE, DELETE_NODE, SAVE_NAME } from '../actions'
 
 const DEFAULT = {
-  addedNodes: [],
-  changedNodes: [],
-  removedNodes: []
+  addedItemNodes: [],
+  changedItemNodes: [],
+  addedItemChildNodes: [],
+  addedNoteNodes: [],
+  changedNoteNodes: [],
+  addedItemNoteNodes: []
 }
 
 export default (state = DEFAULT, action) => {
@@ -12,29 +15,29 @@ export default (state = DEFAULT, action) => {
     name
   } = action;
   let {
-    addedNodes,
-    changedNodes,
-    removedNodes
+    addedItemNodes,
+    changedItemNodes,
+    removedItemNodes
   } = state;
   console.log('Persistence');
   switch (action.type) {
     case SAVE_NAME:
-      changedNodes = changedNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
+      changedItemNodes = changedItemNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
       return {
         ...state,
-        changedNodes: [...changedNodes, nodeId]
+        changedItemNodes: [...changedItemNodes, nodeId]
       }
     case DELETE_NODE:
-      removedNodes = removedNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
+      removedItemNodes = removedItemNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
       return {
         ...state,
-        removedNodes: [...removedNodes, nodeId]
+        removedItemNodes: [...removedItemNodes, nodeId]
       }
     case CREATE_NODE:
-      addedNodes = addedNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
+      addedItemNodes = addedItemNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
       return {
         ...state,
-        addedNodes: [...addedNodes, nodeId]
+        addedItemNodes: [...addedItemNodes, nodeId]
       }
     default:
       return state;
