@@ -1,5 +1,5 @@
 import { all, put, call, takeEvery } from 'redux-saga/effects'
-import { FETCH_ITEMS, FETCH_NOTES, FETCH_ITEM_CHILDREN, FETCH_ITEM_NOTES } from '../actions';
+import { FETCH_ITEMS, FETCH_NOTES, FETCH_ITEM_CHILDREN, FETCH_ITEM_NOTES, SAVE_NAME } from '../actions';
 
 const api_root = 'https://personal-dashboard-umbrella-kino6052.c9users.io';
 
@@ -114,11 +114,8 @@ export function* fetchItems() {
   }
 }
 
-export async function* fetchItemChildren() {
+export function* fetchItemChildren() {
   console.log('Hello Sagas!')
-  // let test = await fetch(`${api_root}/item`)
-  // let json = await test.json();
-  // console.log(json);
 }
 
 export function* fetchNotes() {
@@ -137,11 +134,16 @@ export function* fetchNotes() {
   }
 }
 
-export async function* fetchItemNotes() {
+export function* fetchItemNotes() {
   console.log('Hello Sagas!')
-  // let test = await fetch(`${api_root}/item`)
-  // let json = await test.json();
-  // console.log(json);
+}
+
+export function* saveItemNode(data) {
+  console.log(data);
+}
+
+export function* saveItemNodeWatcher() {
+  yield takeEvery(SAVE_NAME, saveItemNode)
 }
 
 export function* fetchItemsWatcher() {
@@ -167,6 +169,7 @@ export function* init() {
 
 export function* rootSaga() {
   yield all([
+    saveItemNodeWatcher(),
     fetchItemsWatcher(),
     fetchItemChildrenWatcher(),
     fetchItemNotesWatcher(),
