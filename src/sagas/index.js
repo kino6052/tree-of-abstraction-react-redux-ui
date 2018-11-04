@@ -1,7 +1,19 @@
-import { all, put, call, takeEvery } from 'redux-saga/effects'
+import { all, put, call, takeEvery, select } from 'redux-saga/effects'
 import { FETCH_ITEMS, FETCH_NOTES, FETCH_ITEM_CHILDREN, FETCH_ITEM_NOTES, SAVE_NAME } from '../actions';
+import {changed_nodes_selector, added_nodes_selector} from '../selectors/node.js'
+import {changed_notes_selector, added_notes_selector} from '../selectors/note.js'
 
 const api_root = 'https://personal-dashboard-umbrella-kino6052.c9users.io';
+
+const augmentedFetch = (method, data) => {
+  return fetch(`${api_root}/item`, {
+    method: method,
+    body: JSON.stringify(data),
+    headers: {
+        "Content-Type": "application/json; charset=utf-8",
+    }
+  })
+}
 
 const fetchItemsHelper = async () => {
   let itemResponse = await fetch(`${api_root}/item`);
@@ -140,6 +152,17 @@ export function* fetchItemNotes() {
 
 export function* saveItemNode(data) {
   console.log(data);
+}
+
+export function* persistNodes(data) {
+  let {
+    changedNodes,
+    newNodes
+  } = data;
+  let nodes = yield select()
+  for (let node of changedNodes) {
+    // TODO: Implement
+  }
 }
 
 export function* saveItemNodeWatcher() {

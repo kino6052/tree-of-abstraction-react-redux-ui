@@ -26,10 +26,15 @@ export default (state = DEFAULT, action) => {
   switch (action.type) {
     case SAVE_NAME:
       changedItemNodes = changedItemNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
-      return {
-        ...state,
-        changedItemNodes: [...changedItemNodes, nodeId]
+      let isNewNode = nodeId.match(/new/) ? true : false // we only add existing nodes to the changedItemNodes list
+      if (!isNewNode) {
+        return {
+          ...state,
+          changedItemNodes: [...changedItemNodes, nodeId]
+        }
       }
+      return state;
+
     case DELETE_NODE:
       removedItemNodes = removedItemNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
       return {
@@ -37,7 +42,7 @@ export default (state = DEFAULT, action) => {
         removedItemNodes: [...removedItemNodes, nodeId]
       }
     case CREATE_NODE:
-      addedItemNodes = addedItemNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
+      addedItemNodes = addedItemNodes.filter(id => nodeId !== id)
       return {
         ...state,
         addedItemNodes: [...addedItemNodes, nodeId]
