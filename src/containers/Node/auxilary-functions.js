@@ -15,7 +15,7 @@ export const handleAddChildClickGenerator = (that) => {
     e.preventDefault()
     console.log('here');
     const { addChild, createNode, id } = that.props
-    const childId = createNode().nodeId
+    const childId = createNode(id).nodeId
     addChild(id, childId)
   }
 }

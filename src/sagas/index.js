@@ -1,6 +1,6 @@
 import { all, put, call, takeEvery, select } from 'redux-saga/effects'
 import { FETCH_ITEMS, FETCH_NOTES, FETCH_ITEM_CHILDREN, FETCH_ITEM_NOTES, SAVE_NAME } from '../actions';
-import {changed_nodes_selector, added_nodes_selector, nodes_selector} from '../selectors/node.js'
+import {changed_nodes_selector, added_nodes_selector, nodes_selector, added_item_child_selector} from '../selectors/node.js'
 import {changed_notes_selector, added_notes_selector} from '../selectors/note.js'
 
 const api_root = 'https://personal-dashboard-umbrella-kino6052.c9users.io';
@@ -159,6 +159,8 @@ export function* persistNodes() {
   let nodes = yield select(nodes_selector);
   let changedNodes = yield select(changed_nodes_selector);
   let addedNodes = yield select(added_nodes_selector);
+  let itemChildren = yield select(added_item_child_selector);
+  console.log(itemChildren)
   for (let nodeId of changedNodes) {
     console.log(nodes[nodeId]);
   }

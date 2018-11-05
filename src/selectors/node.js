@@ -30,6 +30,7 @@ export const get_parent_node_id_selector = (state, nodeId) => {
       } = nodeChild;
       return childId === nodeId;
   })
+  debugger;
   let {
     parentId
   } = nodeChild;
@@ -47,10 +48,12 @@ export const changed_nodes_selector = (state) => {
 }
 
 export const added_item_child_selector = (state) => {
+  let result = [];
   let {
     persistence: {
       addedItemChildNodes = []
     } = {}
   } = state || {}
+
   return addedItemChildNodes;
 }

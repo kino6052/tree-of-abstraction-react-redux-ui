@@ -13,6 +13,7 @@ export default (state = DEFAULT, action) => {
   let {
     nodeId,
     noteId,
+    parentId,
     name
   } = action;
   let {
@@ -20,7 +21,8 @@ export default (state = DEFAULT, action) => {
     changedItemNodes,
     removedItemNodes,
     changedNoteNodes,
-    addedNoteNodes
+    addedNoteNodes,
+    addedItemChildNodes
   } = state;
   console.log('Persistence');
   switch (action.type) {
@@ -45,7 +47,8 @@ export default (state = DEFAULT, action) => {
       addedItemNodes = addedItemNodes.filter(id => nodeId !== id)
       return {
         ...state,
-        addedItemNodes: [...addedItemNodes, nodeId]
+        addedItemNodes: [...addedItemNodes, nodeId],
+        addedItemChildNodes: [...addedItemChildNodes, {parentId, childId: nodeId}]
       }
     case SAVE_NOTE:
       debugger;
