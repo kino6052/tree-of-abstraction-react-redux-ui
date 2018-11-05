@@ -45,6 +45,7 @@ export default (state = DEFAULT, action) => {
       }
     case CREATE_NODE:
       addedItemNodes = addedItemNodes.filter(id => nodeId !== id)
+      debugger;
       return {
         ...state,
         addedItemNodes: [...addedItemNodes, nodeId],

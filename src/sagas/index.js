@@ -155,7 +155,7 @@ export function* saveItemNode(data) {
   console.log(data);
 }
 
-export async function* persistNodes() {
+export function* persistNodes() {
   let nodes = yield select(nodes_selector);
   let changedNodes = yield select(changed_nodes_selector);
   let addedNodes = yield select(added_nodes_selector);
@@ -168,8 +168,11 @@ export async function* persistNodes() {
     let json = await response.json();
     console.log(json);
     let { _id } = json;
-    yield put('UPDATE_ID', id, _id);
-    yield put('REMOVE_NODE_FROM_PERSISTENCE', id)
+    debugger;
+    let itemChild = itemChildren.find(itemChild => itemChild.childId === id);
+    let { parentId } = itemChild;
+    debugger;
+    yield put({ type: 'UPDATE_ID', oldNodeId: id, newNodeId: _id, parentId });
   }
   for (let nodeId of changedNodes) {
     console.log(nodes[nodeId]);

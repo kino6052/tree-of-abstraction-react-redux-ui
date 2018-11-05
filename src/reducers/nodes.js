@@ -79,10 +79,10 @@ const toggleCollapseMany = (state, ids) => {
 }
 
 export default (state = {}, action) => {
-  const { nodeId, tree } = action
-  if (typeof nodeId === 'undefined' && !tree) {
-    return state
-  }
+  const { nodeId, tree, oldNodeId, newNodeId, parentId } = action
+  // if (typeof nodeId === 'undefined' && !tree) {
+  //   return state
+  // }
 
   if (action.type === DELETE_NODE) {
     let descendantIds = getAllDescendantIds(state, nodeId)
@@ -93,6 +93,25 @@ export default (state = {}, action) => {
   if (action.type === TOGGLE_COLLAPSE_MANY) {
     let descendantIds = getImmediateDescendantIds(state, nodeId) || []
     return toggleCollapseMany(state, descendantIds)
+  }
+
+  if (action.type === 'UPDATE_ID') {
+    let newState = {...state};
+    debugger;
+    for (let id in newState) {
+      debugger;
+      if (id === oldNodeId) { // changing node
+        let oldNode = newState[id]
+        oldNode.id = newNodeId
+        delete newState[id];
+        newState[newNodeId] = oldNode;
+      }
+      if (id === parentId) { // updating parent node children
+        newState[parentId].childIds = newState[parentId].childIds.filter(childId => childId !== oldNodeId);
+        newState[parentId].childIds.push(newNodeId);
+      }
+    }
+    return newState;
   }
 
   if (action.type === 'SET_TREE') {
