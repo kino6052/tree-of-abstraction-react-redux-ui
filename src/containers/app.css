@@ -2,10 +2,16 @@ body {
   margin: 0;
 }
 
+.Menu {
+  display: flex;
+  flex-direction: row;
+  height: 5vh;
+}
+
 .App {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 95vh;
 }
 
 .NodeContainer {

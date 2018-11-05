@@ -64,3 +64,7 @@ export const toggleCollapseMany = (nodeId) => ({
   type: TOGGLE_COLLAPSE_MANY,
   nodeId
 })
+
+export const persistNodes = () => ({
+  type: 'PERSIST_NODES'
+})

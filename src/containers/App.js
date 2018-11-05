@@ -8,6 +8,18 @@ import { Node } from './Node/Node'
 import './app.css';
 
 export class App extends Component {
+  constructor(props){
+    super(props);
+    this.handleSaveClick = this.handleSaveClick.bind(this);
+  }
+  handleSaveClick(e){
+    let {
+      props: {
+        persistNodes
+      }
+    } = this;
+    persistNodes();
+  }
   render() {
     let {
       props: {
@@ -19,13 +31,19 @@ export class App extends Component {
     } = this;
     if (id) {
       return (
-        <div className={'App'}>
-          <div className={'NodeContainer'}>
-            <h1> Hierarchy </h1>
-            <Node {...this.props} collapsed={false}/>
+        <div>
+          <div className={'Menu'}>
+            <button onClick={this.handleSaveClick}>Save</button>
           </div>
-          <Note />
+          <div className={'App'}>
+            <div className={'NodeContainer'}>
+              <h1> Hierarchy </h1>
+              <Node {...this.props} collapsed={false}/>
+            </div>
+            <Note />
+          </div>
         </div>
+
       )
     } else {
       return null;

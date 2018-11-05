@@ -155,7 +155,7 @@ export function* saveItemNode(data) {
   console.log(data);
 }
 
-export function* persistNodes(data) {
+export function* persistNodes() {
   let nodes = yield select(nodes_selector);
   let changedNodes = yield select(changed_nodes_selector);
   let addedNodes = yield select(added_nodes_selector);
@@ -184,19 +184,23 @@ export function* fetchItemNotesWatcher() {
   yield takeEvery(FETCH_ITEM_NOTES, fetchItemNotes)
 }
 
+export function* persistNodesWatcher() {
+  yield takeEvery('PERSIST_NODES', persistNodes);
+}
+
 export function* hotKeyWatcher() {
   let keys = [];
   let callbacks = {
     '["Alt"]': () => {
       console.log('hey!');
     },
-    '["Control","Shift","S"]': function* () {
+    '["Control","Shift","S"]': () => {
       console.log('here');
-      yield persistNodes();
+      persistNodes();
     }
   }
   document.addEventListener('keydown', (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     let {
       key
     } = e;
@@ -227,6 +231,7 @@ export function* rootSaga() {
     fetchItemChildrenWatcher(),
     fetchItemNotesWatcher(),
     fetchNotesWatcher(),
+    persistNodesWatcher(),
     init()
   ])
 }
