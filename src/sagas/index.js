@@ -184,6 +184,36 @@ export function* fetchItemNotesWatcher() {
   yield takeEvery(FETCH_ITEM_NOTES, fetchItemNotes)
 }
 
+export function* hotKeyWatcher() {
+  let keys = [];
+  let callbacks = {
+    '["Alt"]': () => {
+      console.log('hey!');
+    },
+    '["Control","Shift","S"]': function* () {
+      console.log('here');
+      yield persistNodes();
+    }
+  }
+  document.addEventListener('keydown', (e) => {
+    e.preventDefault();
+    let {
+      key
+    } = e;
+    keys = keys.filter(k => key !== k);
+    keys.push(key);
+    let combination = JSON.stringify(keys);
+    // console.log(combination);
+    (callbacks[combination] || (() => {}))();
+  });
+  document. addEventListener('keyup', (e) => {
+    let {
+      key
+    } = e;
+    keys = []
+  });
+}
+
 export function* init() {
   console.log('here');
   yield put({ type: FETCH_ITEMS });
@@ -191,6 +221,7 @@ export function* init() {
 
 export function* rootSaga() {
   yield all([
+    hotKeyWatcher(),
     saveItemNodeWatcher(),
     fetchItemsWatcher(),
     fetchItemChildrenWatcher(),

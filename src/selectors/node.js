@@ -21,16 +21,19 @@ export const added_nodes_selector = (state) => {
 
 export const get_parent_node_id_selector = (state, nodeId) => {
   let {
-    nodes = {}
+    nodes = {},
+    nodeChildren = []
   } = state;
-  for (let id of nodes){
-    let childIds = nodes[id].childIds;
-    let hasNodeId = childIds.find(id => id ===  nodeId) ? true : false;
-    if (hasNodeId) {
-      return id;
-    }
-    return;
-  }
+  let nodeChild = nodeChildren.find((nodeChild) => {
+      let {
+        childId
+      } = nodeChild;
+      return childId === nodeId;
+  })
+  let {
+    parentId
+  } = nodeChild;
+  return parentId;
 }
 
 export const changed_nodes_selector = (state) => {
