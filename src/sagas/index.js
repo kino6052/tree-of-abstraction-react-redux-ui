@@ -155,12 +155,22 @@ export function* saveItemNode(data) {
   console.log(data);
 }
 
-export function* persistNodes() {
+export async function* persistNodes() {
   let nodes = yield select(nodes_selector);
   let changedNodes = yield select(changed_nodes_selector);
   let addedNodes = yield select(added_nodes_selector);
   let itemChildren = yield select(added_item_child_selector);
   console.log(itemChildren)
+  for (let nodeId of addedNodes) {
+    let node = nodes[nodeId];
+    let { id, title } = node;
+    let response = await augmentedFetch('POST', { title });
+    let json = await response.json();
+    console.log(json);
+    let { _id } = json;
+    yield put('UPDATE_ID', id, _id);
+    yield put('REMOVE_NODE_FROM_PERSISTENCE', id)
+  }
   for (let nodeId of changedNodes) {
     console.log(nodes[nodeId]);
   }
