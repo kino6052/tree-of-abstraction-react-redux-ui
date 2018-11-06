@@ -158,10 +158,8 @@ export async function* persistNodes() {
     let response = await augmentedFetch('POST', { title });
     let json = await response.json();
     let { _id } = json;
-    debugger;
     let itemChild = itemChildren.find(itemChild => itemChild.childId === id);
     let { parentId } = itemChild;
-    debugger;
     yield put({ type: 'UPDATE_ID', oldNodeId: id, newNodeId: _id, parentId });
   }
   for (let nodeId of changedNodes) {

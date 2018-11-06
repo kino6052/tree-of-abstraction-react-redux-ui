@@ -14,7 +14,6 @@ export default (state = [], action) => {
       return [...notes];
     case 'SAVE_NOTE':
       let newNotes = [...state];
-      debugger;
       for (let i in newNotes) {
         let note = newNotes[i];
         if (note['_id'] === noteId) {

@@ -30,7 +30,6 @@ export const get_parent_node_id_selector = (state, nodeId) => {
       } = nodeChild;
       return childId === nodeId;
   })
-  debugger;
   let {
     parentId
   } = nodeChild;

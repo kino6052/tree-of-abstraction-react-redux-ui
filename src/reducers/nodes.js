@@ -98,9 +98,7 @@ export default (state = {}, action) => {
 
   if (action.type === 'UPDATE_ID') {
     let newState = {...state};
-    debugger;
     for (let id in newState) {
-      debugger;
       if (id === oldNodeId) { // changing node
         let oldNode = newState[id]
         oldNode.id = newNodeId

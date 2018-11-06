@@ -44,14 +44,12 @@ export default (state = DEFAULT, action) => {
       }
     case CREATE_NODE:
       addedItemNodes = addedItemNodes.filter(id => nodeId !== id)
-      debugger;
       return {
         ...state,
         addedItemNodes: [...addedItemNodes, nodeId],
         addedItemChildNodes: [...addedItemChildNodes, {parentId, childId: nodeId}]
       }
     case SAVE_NOTE:
-      debugger;
       changedNoteNodes = changedNoteNodes.filter(id => noteId !== id) // edge case: duplicates of nodeId
       return {
         ...state,
