@@ -45,22 +45,23 @@ const  generateItemTree = (itemJson, itemChildJson) => {
   let itemChildrenMap = {}
   for (let item of itemJson) {
     let {
-      _id
+      _id,
+      children
     } = item;
-    item.children = [];
     itemsMap[_id] = item;
+    itemChildrenMap[_id] = children;
   }
-  for (let itemChild of itemChildJson) {
-    let {
-      parentId,
-      childId
-    } = itemChild;
-    if (itemChildrenMap[parentId]) {
-      itemChildrenMap[parentId] = [...itemChildrenMap[parentId], itemChild.childId];
-    } else {
-      itemChildrenMap[parentId] = [itemChild.childId]
-    }
-  }
+  // for (let itemChild of itemChildJson) {
+  //   let {
+  //     parentId,
+  //     childId
+  //   } = itemChild;
+  //   if (itemChildrenMap[parentId]) {
+  //     itemChildrenMap[parentId] = [...itemChildrenMap[parentId], itemChild.childId];
+  //   } else {
+  //     itemChildrenMap[parentId] = [itemChild.childId]
+  //   }
+  // }
   let result = [];
   let queue = [ROOT];
   while(queue.length > 0) {
