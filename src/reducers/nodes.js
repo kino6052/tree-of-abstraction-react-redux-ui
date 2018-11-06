@@ -47,7 +47,6 @@ export const getAllDescendantIds = (state, nodeId) => {
   let t = childIds.reduce((acc, childId) => {
     return [ ...acc, childId, ...getAllDescendantIds(state, childId) ]
   }, [])
-  console.log(t);
   return [...t, nodeId] || [];
 }
 
