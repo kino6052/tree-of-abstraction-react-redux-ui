@@ -9,7 +9,6 @@ export class Link extends React.Component {
         onClick
       }
     } = this;
-    console.log('here');
     return (
       <a className={'Link'} onClick={onClick} style={{ color: 'lightgray', textDecoration: 'none' }}>
           { collapsed ? '|' : '_' }

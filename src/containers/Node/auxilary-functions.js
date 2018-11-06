@@ -13,7 +13,6 @@ export const handleIncrementClickGenerator = (that) => {
 export const handleAddChildClickGenerator = (that) => {
   return e => {
     e.preventDefault()
-    console.log('here');
     const { addChild, createNode, id } = that.props
     const childId = createNode(id).nodeId
     addChild(id, childId)
@@ -65,7 +64,7 @@ export const handleSelectNodeGenerator = (that) => {
     } = that;
     e.preventDefault()
     let descendantIds = [...getAllDescendantIds(nodes, id), id];
-    console.log('descendantIds', descendantIds);
+    console.log('Selected id', id);
     let selectedNotes = notes.filter(note => {
       let {
         itemIds = []
@@ -75,7 +74,6 @@ export const handleSelectNodeGenerator = (that) => {
           isContained = isContained || itemIds.find(itemId => itemId === descendantId) ? true : false;
       }
       if (isContained){
-        console.log('contained');
         return note;
       }
     })

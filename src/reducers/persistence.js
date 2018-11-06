@@ -24,7 +24,6 @@ export default (state = DEFAULT, action) => {
     addedNoteNodes,
     addedItemChildNodes
   } = state;
-  console.log('Persistence');
   switch (action.type) {
     case SAVE_NAME:
       changedItemNodes = changedItemNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId

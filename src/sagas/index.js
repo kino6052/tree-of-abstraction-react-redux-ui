@@ -120,15 +120,10 @@ export function* fetchItems() {
   if (itemJson && itemChildJson) {
     console.log('Generating result');
     let result = yield call(generateItemTree, itemJson, itemChildJson)
-    console.log(result)
     yield put({ type: 'SET_TREE', tree: result || []});
     yield put({ type: 'SET_ITEM_CHILDREN', itemChildren: itemChildJson });
     yield put({ type: 'FETCH_NOTES'});
   }
-}
-
-export function* fetchItemChildren() {
-  console.log('Hello Sagas!')
 }
 
 export function* fetchNotes() {
@@ -147,15 +142,10 @@ export function* fetchNotes() {
   }
 }
 
-export function* fetchItemNotes() {
-  console.log('Hello Sagas!')
-}
-
 export function* saveItemNode(data) {
-  console.log(data);
 }
 
-export function* persistNodes() {
+export async function* persistNodes() {
   let nodes = yield select(nodes_selector);
   let changedNodes = yield select(changed_nodes_selector);
   let addedNodes = yield select(added_nodes_selector);
@@ -166,7 +156,6 @@ export function* persistNodes() {
     let { id, title } = node;
     let response = await augmentedFetch('POST', { title });
     let json = await response.json();
-    console.log(json);
     let { _id } = json;
     debugger;
     let itemChild = itemChildren.find(itemChild => itemChild.childId === id);
@@ -187,16 +176,8 @@ export function* fetchItemsWatcher() {
   yield takeEvery(FETCH_ITEMS, fetchItems)
 }
 
-export function* fetchItemChildrenWatcher() {
-  yield takeEvery(FETCH_ITEM_CHILDREN, fetchItemChildren)
-}
-
 export function* fetchNotesWatcher() {
   yield takeEvery(FETCH_NOTES, fetchNotes)
-}
-
-export function* fetchItemNotesWatcher() {
-  yield takeEvery(FETCH_ITEM_NOTES, fetchItemNotes)
 }
 
 export function* persistNodesWatcher() {
@@ -207,10 +188,8 @@ export function* hotKeyWatcher() {
   let keys = [];
   let callbacks = {
     '["Alt"]': () => {
-      console.log('hey!');
     },
     '["Control","Shift","S"]': () => {
-      console.log('here');
       persistNodes();
     }
   }
@@ -234,7 +213,6 @@ export function* hotKeyWatcher() {
 }
 
 export function* init() {
-  console.log('here');
   yield put({ type: FETCH_ITEMS });
 }
 
@@ -243,8 +221,6 @@ export function* rootSaga() {
     hotKeyWatcher(),
     saveItemNodeWatcher(),
     fetchItemsWatcher(),
-    fetchItemChildrenWatcher(),
-    fetchItemNotesWatcher(),
     fetchNotesWatcher(),
     persistNodesWatcher(),
     init()

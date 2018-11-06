@@ -8,7 +8,7 @@ export class AddButton extends React.Component {
       }
     } = this;
     return (
-      <div className={'Add'} key="add" onClick={ () => {console.log('click')} }>
+      <div className={'Add'} key="add">
         <a // eslint-disable-line jsx-a11y/anchor-is-valid
           onClick={ onClick }
         >
@@ -27,7 +27,7 @@ export class EditButton extends React.Component {
       }
     } = this;
     return (
-      <div className={'Edit'} key="add" onClick={ () => {console.log('click')} }>
+      <div className={'Edit'} key="add">
         <a // eslint-disable-line jsx-a11y/anchor-is-valid
           onClick={ onClick }
         >
@@ -46,7 +46,7 @@ export class RemoveButton extends React.Component {
       }
     } = this;
     return (
-      <div className={'Remove'} key="remove" onClick={ () => {console.log('click')} }>
+      <div className={'Remove'} key="remove">
         <a // eslint-disable-line jsx-a11y/anchor-is-valid
           onClick={ onClick }
         >
