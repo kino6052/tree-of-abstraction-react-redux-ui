@@ -42,8 +42,17 @@ export const changed_nodes_selector = (state) => {
     persistence: {
       changedItemNodes = []
     } = {}
-  } = state || {}
-  return changedItemNodes;
+  } = state || {};
+  let result = [];
+  for (let id of changedItemNodes){
+    let {
+      id: _id,
+      childIds: children,
+      title
+    } = nodes[id];
+    result.push({ _id, children, title});
+  }
+  return result;
 }
 
 export const added_item_child_selector = (state) => {

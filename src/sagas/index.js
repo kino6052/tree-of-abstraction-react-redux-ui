@@ -1,5 +1,5 @@
 import { all, put, call, takeEvery, select } from 'redux-saga/effects'
-import { FETCH_ITEMS, FETCH_NOTES, SAVE_NAME } from '../actions';
+import { FETCH_ITEMS, FETCH_NOTES, SAVE_NAME, CLEAR_PERSISTENCE } from '../actions';
 import {changed_nodes_selector, added_nodes_selector, nodes_selector, added_item_child_selector} from '../selectors/node.js'
 // import {changed_notes_selector, added_notes_selector} from '../selectors/note.js'
 
@@ -39,45 +39,19 @@ const fetchItemNotesHelper = async () => {
   return json;
 }
 
-const  generateItemTree = (itemJson, itemChildJson) => {
-  const ROOT = '5b6605a886ec2e1a5a713867';
+const  generateItemTree = (itemJson) => {
   let itemsMap = {}
-  let itemChildrenMap = {}
   for (let item of itemJson) {
     let {
       _id,
       children
     } = item;
-    itemsMap[_id] = item;
-    itemChildrenMap[_id] = children;
-  }
-  // for (let itemChild of itemChildJson) {
-  //   let {
-  //     parentId,
-  //     childId
-  //   } = itemChild;
-  //   if (itemChildrenMap[parentId]) {
-  //     itemChildrenMap[parentId] = [...itemChildrenMap[parentId], itemChild.childId];
-  //   } else {
-  //     itemChildrenMap[parentId] = [itemChild.childId]
-  //   }
-  // }
-  let result = [];
-  let queue = [ROOT];
-  while(queue.length > 0) {
-    let currentId = queue.pop();
-    let currentNode = itemsMap[currentId];
-    let currentChildren = itemChildrenMap[currentId];
-    if (currentNode) {
-      currentNode.childIds = currentChildren || [];
-      currentNode.id = currentNode['_id'];
-      currentNode.parentId = currentNode['_id'];
-      currentNode.collapsed = true;
-      itemsMap[currentNode.id] = currentNode;
-      if (currentChildren) {
-          queue = [...currentChildren, ...queue]
-      }
-    }
+    itemsMap[_id] = {
+      ...item,
+      childIds: children,
+      id: _id,
+      collapsed: true,
+    };
   }
   return itemsMap;
 }
@@ -146,25 +120,26 @@ export function* fetchNotes() {
 export function* saveItemNode(data) {
 }
 
-export async function* persistNodes() {
-  let nodes = yield select(nodes_selector);
+const postNodes = async (changedNodes) => {
+  debugger;
+  let itemResponse = await fetch(
+    `${api_root}/item?type=batch`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify(changedNodes) 
+    }
+  );
+  let json = await itemResponse.json();
+  console.log(json);
+  return json;
+}
+
+export function* persistNodes() {
   let changedNodes = yield select(changed_nodes_selector);
-  let addedNodes = yield select(added_nodes_selector);
-  let itemChildren = yield select(added_item_child_selector);
-  console.log(itemChildren)
-  for (let nodeId of addedNodes) {
-    let node = nodes[nodeId];
-    let { id, title } = node;
-    let response = await augmentedFetch('POST', { title });
-    let json = await response.json();
-    let { _id } = json;
-    let itemChild = itemChildren.find(itemChild => itemChild.childId === id);
-    let { parentId } = itemChild;
-    yield put({ type: 'UPDATE_ID', oldNodeId: id, newNodeId: _id, parentId });
-  }
-  for (let nodeId of changedNodes) {
-    console.log(nodes[nodeId]);
-  }
+  yield call(postNodes, changedNodes);
+  yield put({type: CLEAR_PERSISTENCE })
 }
 
 export function* saveItemNodeWatcher() {

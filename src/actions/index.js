@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 export const INCREMENT = 'INCREMENT'
 export const CREATE_NODE = 'CREATE_NODE'
 export const DELETE_NODE = 'DELETE_NODE'
@@ -12,16 +14,21 @@ export const FETCH_NOTES = 'FETCH_NOTES'
 export const FETCH_ITEM_NOTES = 'FETCH_ITEM_NOTES'
 export const FETCH_ITEM_CHILDREN = 'FETCH_ITEM_CHILDREN'
 export const SAVE_NOTE = 'SAVE_NOTE';
+export const CLEAR_PERSISTENCE = 'CLEAR_PERSISTENCE';
 
 export const increment = (nodeId) => ({
   type: INCREMENT,
   nodeId
 })
 
-let nextId = 0
+const generateUid = () => {
+    const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    return (S4() + S4() + S4() + S4() + S4() + S4());
+};
+
 export const createNode = (parentId) => ({
   type: CREATE_NODE,
-  nodeId: `new_${nextId++}`,
+  nodeId: generateUid(),
   parentId
 })
 

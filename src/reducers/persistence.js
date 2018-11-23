@@ -1,4 +1,4 @@
-import { CREATE_NODE, DELETE_NODE, SAVE_NAME, SAVE_NOTE } from '../actions'
+import { CREATE_NODE, DELETE_NODE, SAVE_NAME, SAVE_NOTE, CLEAR_PERSISTENCE } from '../actions'
 
 const DEFAULT = {
   addedItemNodes: [],
@@ -24,37 +24,38 @@ export default (state = DEFAULT, action) => {
     addedNoteNodes,
     addedItemChildNodes
   } = state;
+  let changedItemsSet;
+  let removedItemsSet;
   switch (action.type) {
-    case SAVE_NAME:
-      changedItemNodes = changedItemNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
-      let isNewNode = nodeId.match(/new/) ? true : false // we only add existing nodes to the changedItemNodes list
-      if (!isNewNode) {
-        return {
-          ...state,
-          changedItemNodes: [...changedItemNodes, nodeId]
-        }
-      }
-      return state;
-
     case DELETE_NODE:
-      removedItemNodes = removedItemNodes.filter(id => nodeId !== id) // edge case: duplicates of nodeId
+      removedItemsSet = new Set(removedItemNodes);
+      changedItemsSet = new Set(changedItemNodes);
+      removedItemsSet.add(nodeId);
+      changedItemsSet.add(parentId);
       return {
         ...state,
-        removedItemNodes: [...removedItemNodes, nodeId]
-      }
+        removedItemNodes: Array.from(removedItemsSet),
+        changedItemNodes: Array.from(changedItemsSet)
+      };
+    case SAVE_NAME:
     case CREATE_NODE:
-      addedItemNodes = addedItemNodes.filter(id => nodeId !== id)
+      changedItemsSet = new Set(changedItemNodes);
+      if (parentId) {
+        changedItemsSet.add(parentId); 
+      }
+      changedItemsSet.add(nodeId);
       return {
         ...state,
-        addedItemNodes: [...addedItemNodes, nodeId],
-        addedItemChildNodes: [...addedItemChildNodes, {parentId, childId: nodeId}]
-      }
+        changedItemNodes: Array.from(changedItemsSet)
+      };
     case SAVE_NOTE:
       changedNoteNodes = changedNoteNodes.filter(id => noteId !== id) // edge case: duplicates of nodeId
       return {
         ...state,
         changedNoteNodes: [...changedNoteNodes, noteId]
       }
+    case CLEAR_PERSISTENCE:
+      return DEFAULT;
     default:
       return state;
   }
