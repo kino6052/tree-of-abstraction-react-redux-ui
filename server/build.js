@@ -45,6 +45,6 @@ var app = exports.app = (0, _express2.default)();
 indexEndpoints(app);
 console.log();
 app.use('/static', _express2.default.static(_path2.default.join(__dirname, '/build')));
-app.listen(process.env.PORT || '8080', function () {
+app.listen('4000', function () {
   return console.log('Listening... ' + process.env.PORT);
 });

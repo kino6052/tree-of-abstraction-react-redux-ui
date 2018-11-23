@@ -16,7 +16,7 @@ const augmentedFetch = (method, data) => {
 }
 
 const fetchItemsHelper = async () => {
-  let itemResponse = await fetch(`${api_root}/api/item`);
+  let itemResponse = await fetch(`${api_root}/item`);
   let json = await itemResponse.json();
   return json;
 }
@@ -28,7 +28,7 @@ const fetchItemChildrenHelper = async () => {
 }
 
 const fetchNotesHelper = async () => {
-  let noteResponse = await fetch(`${api_root}/api/note`);
+  let noteResponse = await fetch(`${api_root}/note`);
   let json = await noteResponse.json();
   return json;
 }
