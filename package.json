@@ -2,6 +2,7 @@
   "name": "tree-view",
   "version": "0.0.1",
   "private": true,
+  "proxy": "https://ide.c9.io/kino6052/personal-dashboard-umbrella",
   "devDependencies": {
     "deep-freeze": "0.0.1",
     "enzyme": "^3.6.0",

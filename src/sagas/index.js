@@ -1,9 +1,9 @@
 import { all, put, call, takeEvery, select } from 'redux-saga/effects'
-import { FETCH_ITEMS, FETCH_NOTES, FETCH_ITEM_CHILDREN, FETCH_ITEM_NOTES, SAVE_NAME } from '../actions';
+import { FETCH_ITEMS, FETCH_NOTES, SAVE_NAME } from '../actions';
 import {changed_nodes_selector, added_nodes_selector, nodes_selector, added_item_child_selector} from '../selectors/node.js'
-import {changed_notes_selector, added_notes_selector} from '../selectors/note.js'
+// import {changed_notes_selector, added_notes_selector} from '../selectors/note.js'
 
-const api_root = 'https://personal-dashboard-umbrella-kino6052.c9users.io';
+const api_root = '';
 
 const augmentedFetch = (method, data) => {
   return fetch(`${api_root}/item`, {
@@ -16,7 +16,7 @@ const augmentedFetch = (method, data) => {
 }
 
 const fetchItemsHelper = async () => {
-  let itemResponse = await fetch(`${api_root}/item`);
+  let itemResponse = await fetch(`${api_root}/api/item`);
   let json = await itemResponse.json();
   return json;
 }
@@ -28,7 +28,7 @@ const fetchItemChildrenHelper = async () => {
 }
 
 const fetchNotesHelper = async () => {
-  let noteResponse = await fetch(`${api_root}/note`);
+  let noteResponse = await fetch(`${api_root}/api/note`);
   let json = await noteResponse.json();
   return json;
 }
